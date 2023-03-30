@@ -48,7 +48,7 @@
 #========== TOPDIR ========================================================
 # TOPDIR is the directory in which this make file and the fvcom source reside
 
-           TOPDIR        = 
+           TOPDIR        = /home1/09194/emilieb/FVCOM/src
 #EXAMPLE
 # TOPDIR = /home/user/cchen/FVCOM_source
 # TOPDIR must be set!
@@ -65,19 +65,19 @@
 ####################### MEDM ENVIRONMENT #####################################
 # Use the environmental variables, LIBPATH and INCLUDEPATH, set by MODULE 
 # to find the packages used by this build.
-colon=:
-empty=
-dashI= $(empty) -I
-dashL= $(empty) -L
+#colon=:
+#empty=
+#dashI= $(empty) -I
+#dashL= $(empty) -L
 # ### UNCOMMENT HERE!
-             LIBDIR       =  -L$(subst $(colon),$(dashL),$(LIBPATH))
-             INCDIR       =  -I$(subst $(colon),$(dashI),$(INCLUDEPATH))
+#             LIBDIR       =  -L$(subst $(colon),$(dashL),$(LIBPATH))
+#             INCDIR       =  -I$(subst $(colon),$(dashI),$(INCLUDEPATH))
 
 ###########################################################################
 
 # LOCAL INSTAL
-#             LIBDIR       =  -L$(INSTALLDIR)/lib
-#             INCDIR       =  -I$(INSTALLDIR)/include
+             LIBDIR       =  -L$(INSTALLDIR)/lib
+             INCDIR       =  -I$(INSTALLDIR)/include
 
 
 #--------------------------------------------------------------------------
@@ -94,15 +94,20 @@ dashL= $(empty) -L
 #                           SET PATH TO LIBRARIES WITH IOLIBS      
 #                           SET PATH TO INCLUDE FILES (netcdf.mod) WITH IOINCS
 #--------------------------------------------------------------------------
-            FLAG_USE_NETCDF4     = -DUSE_NETCDF4
+#            FLAG_USE_NETCDF4     = -DUSE_NETCDF4
 #            FLAG_USE_COMPRESSION = -DUSE_COMPRESSION
-             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
+#             IOLIBS       =  -lnetcdff -lnetcdf #-lhdf5_hl -lhdf5 -lz -lcurl -lm
 #             IOLIBS       =  -lnetcdf #-L/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/lib -lnetcdf
-             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
+#             IOINCS       =  #-I/hosts/mao/usr/medm/install/netcdf/3.6.3/em64t/include
 #             IOLIBS       =  -L/usr/local/install/netcdf/gcc_ifort/3.6.2/lib  -lnetcdf
 #             IOINCS       =  -I/usr/local/install/netcdf/gcc_ifort/3.6.2/include
 ##             IOLIBS       = -L/usr/local/install/netcdf-4.4.1.1-with-fortran/lib -lnetcdff -lnetcdf
 ##             IOINCS       = -I/usr/local/install/netcdf-4.4.1.1-with-fortran/include
+    IOINCS         =  -I/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/include
+             IOLIBS         = -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -lnetcdff -Wl,-rpath,/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -Wl,-rpath,/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -L/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -lnetcdf -lnetcdf
+
+
+
 #--------------------------------------------------------------------------
 
 
@@ -133,7 +138,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO SELECT SPHERICAL COORDINATES
 #--------------------------------------------------------------------------
 
-            FLAG_2 = -DSPHERICAL
+#            FLAG_2 = -DSPHERICAL
 
 #--------------------------------------------------------------------------
 #        FLOODYING/DRYING   INCLUDE WET/DRY TREATMENT OF DOMAIN
@@ -143,7 +148,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO INCLUDE FLOODYING/DRYING
 #--------------------------------------------------------------------------
 
-             FLAG_3 = -DWET_DRY
+#             FLAG_3 = -DWET_DRY
 
 #--------------------------------------------------------------------------
 #        MULTI_PROCESSOR    INCLUDES PARALLELIZATION WITH MPI
@@ -153,7 +158,7 @@ dashL= $(empty) -L
 #                           UNCOMMENT TO INCLUDE MPI PARALLEL CAPABILITY
 #--------------------------------------------------------------------------
 
-             FLAG_4 = -DMULTIPROCESSOR
+#             FLAG_4 = -DMULTIPROCESSOR
 #         If using METIS 5 or above, uncomment FLAG_411 and read the file readme_metis in folder METIS_source for detail
 #	     FLAG_411 = -DMETIS_5
 #        If FLAG_411 is defined, uncomment path below	     
@@ -161,9 +166,9 @@ dashL= $(empty) -L
 #             PARTINCS = -I/usr/local/install/metis-5.1.0/gcc-4.4.7/include
 #             PARTLIBS = -L/usr/local/install/metis-5.1.0/gcc-4.4.7/lib -lmetis
 #        If FLAG_411 is not defined, uncomment path below
-             PARLIB = -lmetis  #-L/usr/local/lib -lmetis
-             PARTINCS =
-             PARTLIBS =
+#             PARLIB = -lmetis  #-L/usr/local/lib -lmetis
+#             PARTINCS =
+#             PARTLIBS =
 
 #--------------------------------------------------------------------------
 #        WATER_QUALITY      INCLUDE EPA WATER QUALITY MOD
@@ -292,7 +297,7 @@ dashL= $(empty) -L
 #        diffusion and better shape preserving properties than the standard scheme. 
 #--------------------------------------------------------------------------
 
-            FLAG_44 = -DTVD
+#            FLAG_44 = -DTVD
 
 #--------------------------------------------------------------------------
 #        Using A fully multidimensional positive definite advection
@@ -301,7 +306,7 @@ dashL= $(empty) -L
 #        Physics, 54, 325-362, 1984
 #--------------------------------------------------------------------------
 
-            FLAG_15 = -DMPDATA
+#            FLAG_15 = -DMPDATA
 
 #--------------------------------------------------------------------------
 #         Run Two-D Barotropic Mode Only
