@@ -6,7 +6,7 @@
 
 MYINSTALLDIR = $(INSTALLDIR)
 
-PACKAGES =	proj	fproj	julian	netcdf	#metis
+PACKAGES =	proj	fproj	julian	netcdf	metis
 
 
 all:
@@ -17,7 +17,7 @@ all:
 	cd fproj && make install
 	cd netcdf && ./configure CC=$(CC) CFLAGS=-O3 CXX=$(CC) CXXFLAGS=-O3 F77=$(FC) F90=$(FC) FFLAGS=-O3 --prefix=$(MYINSTALLDIR) --build=$(MACHTYPE)
 	cd netcdf && make install
-#	cd metis && make install
+	cd metis && make install
 	cd julian && make install
 
 
