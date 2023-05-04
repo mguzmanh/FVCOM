@@ -83,8 +83,11 @@
 #--------------------------------------------------------------------------
 #	STANDARD LIBRARIES FOR DATA AND TIME IN fVCOM:
 #
-	    DTLIBS	= -ljulian
-	    DTINCS	=  
+#	    DTLIBS	= -L$(INSTALLDIR)/lib -ljulian
+#	    DTINCS	= -I$(INSTALLDIR)/include 
+	   DTLIBS      = -ljulian
+	   BTINCS      = 
+	    
 #
 #--------------------------------------------------------------------------
 #        NETCDF OUTPUT      NETCDF IS NOW REQUIRED TO COMPILE FVCOM
@@ -103,9 +106,12 @@
 #             IOINCS       =  -I/usr/local/install/netcdf/gcc_ifort/3.6.2/include
 ##             IOLIBS       = -L/usr/local/install/netcdf-4.4.1.1-with-fortran/lib -lnetcdff -lnetcdf
 ##             IOINCS       = -I/usr/local/install/netcdf-4.4.1.1-with-fortran/include
-    	      IOINCS         =  -I/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/include
-              IOLIBS         = -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -lnetcdff -Wl,-rpath,/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -Wl,-rpath,/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -L/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -lnetcdf -lnetcdf
-
+#    	      IOINCS         = -I/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/include
+#             IOLIBS         = -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -lnetcdff -Wl,-rpath,/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -L/opt/apps/intel19/impi19_0/parallel-netcdf/4.6.2/x86_64/lib -Wl,-rpath,/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -L/opt/apps/intel19/impi19_0/phdf5/1.10.4/x86_64/lib -lnetcdf -lnetcdf
+	      IOLIBS       = -L${TACC_NETCDF_LIB} -lnetcdf -lnetcdff  
+	      IOINCS       = -I${TACC_NETCDF_INC}
+#	      IOLIBS       = -L$(INSTALLDIR)/lib -lnetcdff -lnetcdf
+#	      IOINCS       = -I$(INSTALLDIR)/include
 
 
 #--------------------------------------------------------------------------
@@ -160,15 +166,17 @@
 
              FLAG_4 = -DMULTIPROCESSOR
 #         If using METIS 5 or above, uncomment FLAG_411 and read the file readme_metis in folder METIS_source for detail
-#	     FLAG_411 = -DMETIS_5
+	     FLAG_411 = -DMETIS_5
 #        If FLAG_411 is defined, uncomment path below	     
-#             PARLIB = 
+             PARLIB = 
 #             PARTINCS = -I/usr/local/install/metis-5.1.0/gcc-4.4.7/include
 #             PARTLIBS = -L/usr/local/install/metis-5.1.0/gcc-4.4.7/lib -lmetis
+	     PARTINCS = -I$(INSTALLDIR)/include
+	     PARTLIBS = -L$(INSTALLDIR)/lib -lmetis
 #        If FLAG_411 is not defined, uncomment path below
-              PARLIB = -lmetis #-L/usr/local/lib -lmetis
-              PARTINCS =
-              PARTLIBS =
+#              PARLIB = -lmetis #-L/usr/local/lib -lmetis
+#              PARTINCS =
+#              PARTLIBS =
 
 #--------------------------------------------------------------------------
 #        WATER_QUALITY      INCLUDE EPA WATER QUALITY MOD
@@ -586,8 +594,9 @@
          CC       = mpicc
          CXX      = mpicxx
          CFLAGS   = -O3 
-         FC       = mpif90
-#         DEBFLGS  = -check all -traceback
+	 FC       = mpif90  #ls6
+#         FC       = mpiifort  #ganymede
+         DEBFLGS  = -check all -traceback
 # Use 'OPT = -O0 -g'  for fast compile to test the make 
 # Use 'OPT = -xP' for fast run on em64t (Hydra and Guppy)
 # Use 'OPT = -xN' for fast run on ia32 (Salmon and Minke)

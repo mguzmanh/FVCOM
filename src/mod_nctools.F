@@ -275,20 +275,26 @@ SUBROUTINE NC_CREATE(NCF)
   integer :: status
   if(DBG_SET(dbg_sbr)) &
        & write(IPT,*) "STARTING NC_CREATE"
-
+    WRITE(IPT,*)'! 2.081 entered nc create output start file!'
   libnetcdf = trim(nf90_inq_libvers())
+  WRITE(IPT,*)'! 2.081aa entered nc create output start file!'
   errmsg="File named: "//NCF%fname//"; Can not be created by nf90_create"
+  WRITE(IPT,*)'! 2.081bb entered nc create output start file!'
 # if defined (PIO)
 # if defined (USE_NETCDF4)
   if(libnetcdf(1:1) /= '4') CALL FATAL_ERROR("The version of NetCDF is old.",&
                & "Please use NetCDF4.")
   IF(NPROCS_FVCOM > 1 .and. USE_MPI_IO_MODE) THEN
+   WRITE(IPT,*)'! 2.081a entered nc create output start file!'
     status = nf90_create(trim(NCF%fname),IOR(NF90_NETCDF4,NF90_MPIIO), &
                          NCF%ncid,comm=MPI_FVCOM_GROUP,info=MPI_INFO_NULL)
   ELSE
+             WRITE(IPT,*)'! 2.081b entered nc create output start file!'
     status = nf90_create(trim(NCF%fname),NF90_NETCDF4,NCF%ncid)
+       WRITE(IPT,*)'! 2.081c entered nc create output start file!'
   ENDIF
-# else
+# elsei
+   WRITE(IPT,*)'! 2.082 entered nc create output start file!'
 !  if(libnetcdf(1:1) == '4') CALL FATAL_ERROR("The version of NetCDF is 4.",&
 !               & "Please use NetCDF3.")
   IF(NPROCS_FVCOM > 1 .and. USE_MPI_IO_MODE) THEN
@@ -297,6 +303,7 @@ SUBROUTINE NC_CREATE(NCF)
   ELSE
     status = nf90_create(trim(NCF%fname),NF90_64BIT_OFFSET,NCF%ncid)
   ENDIF
+   WRITE(IPT,*)'! 2.083 entered nc create output start file!'
 # endif
 # else
 # if defined (USE_NETCDF4)

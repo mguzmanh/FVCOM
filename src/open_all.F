@@ -120,14 +120,14 @@ SUBROUTINE OPEN_ALL
              &r this cold start"
 
      END IF
-    
+     WRITE(IPT,*)'! 1. finished requesting start file!'
      ! OPEN THE OTHER COLD START FILES (GRID,DEPTH SPONGE, ETC)
      IF (MSR) CALL OPEN_COLDSTART ! ONLY MASTER READS THESE FILES
-     
+     WRITE(IPT,*)'! 2. open coldstart start file!'
      CALL OPEN_FORCING
-
+     WRITE(IPT,*)'! 2.5 finished open new output start file!'
      CALL OPEN_NEW_OUTPUT 
-
+     WRITE(IPT,*)'! 3. finished open new output start file!'     
      IF(NESTING_ON) CALL OPEN_NESTING_FILE
 #    if defined (WAVE_CURRENT_INTERACTION)
      IF(NESTING_ON_WAVE) CALL OPEN_NESTING_FILE_WAVE
@@ -135,7 +135,7 @@ SUBROUTINE OPEN_ALL
 #    if defined (VEGETATION)
      CALL OPEN_FORCING_VEGETATION
 #    endif     
-
+     WRITE(IPT,*)'! 4. finished everything!'
   END SELECT
 
 

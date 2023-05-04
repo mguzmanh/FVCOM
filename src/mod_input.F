@@ -1405,16 +1405,23 @@ CONTAINS
     back = .true.
     ! SETUP AND CREATE DATA OUTPUT FILES!
     IF(NC_ON) THEN
+    WRITE(IPT,*)'! 2.6 finished open new output start file!'
        NC_FILE_NAME = trim(casename)//"_0001.nc"
        pathnfile = trim(OUTPUT_DIR)//trim(NC_FILE_NAME)
+     WRITE(IPT,*)'! 2.7 finished open new output start file!'
        CALL NC_INIT(NCF,pathnfile)
+    WRITE(IPT,*)'! 2.8 finished open new output start file!'
        if(msr) then
+               WRITE(IPT,*)'! 2.80 finished if condition new output start file!'               
           CALL NC_CREATE(NCF)
+    WRITE(IPT,*)'! 2.81 finished nc create output start file!'          
           CALL NC_CLOSE(NCF)
+    WRITE(IPT,*)'! 2.82 finished nc close output start file!'
        else
           NCF%writable = .true.
+    WRITE(IPT,*)'! 2.83 finished open new output start file!'
        end if
-
+    WRITE(IPT,*)'! 2.9 finished open new output start file!'
        NC_DAT => NCF
 
        FILEHEAD => ADD(FILEHEAD,NCF)
