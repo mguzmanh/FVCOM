@@ -1829,7 +1829,7 @@ SUBROUTINE INTERNAL_STEP
   DT  = D 
   ET1 = EL1
   DT1 = D1
-  
+
   IF(WETTING_DRYING_ON) CALL WD_UPDATE(3)
   
   ! New Open Boundary Condition ----10

@@ -45,7 +45,7 @@
 
 .F90.o:
 	$(CPP) $(CPPFLAGS) $(CPPDEFS) $(INCLDIR) $< > $*.f  
-	$(FC) -c $(FFLAGS) $(FIXEDFLAGS) $(INCS) $(INCLDIR) $*.f  
+	$(FC) -c $(FFLAGS) $(FIXEDFLAGS) $(INCS) $(INCLDIR) $*.f 	
 	\rm $*.f90
 
 

@@ -86,8 +86,8 @@
 #	    DTLIBS	= -L$(INSTALLDIR)/lib -ljulian
 #	    DTINCS	= -I$(INSTALLDIR)/include 
 	   DTLIBS      = -ljulian
-	   BTINCS      = 
-	    
+	   BTINCS      =
+
 #
 #--------------------------------------------------------------------------
 #        NETCDF OUTPUT      NETCDF IS NOW REQUIRED TO COMPILE FVCOM
@@ -154,7 +154,7 @@
 #                           UNCOMMENT TO INCLUDE FLOODYING/DRYING
 #--------------------------------------------------------------------------
 
-             FLAG_3 = -DWET_DRY
+#             FLAG_3 = -DWET_DRY
 
 #--------------------------------------------------------------------------
 #        MULTI_PROCESSOR    INCLUDES PARALLELIZATION WITH MPI
@@ -166,9 +166,9 @@
 
              FLAG_4 = -DMULTIPROCESSOR
 #         If using METIS 5 or above, uncomment FLAG_411 and read the file readme_metis in folder METIS_source for detail
-	     FLAG_411 = -DMETIS_5
+##	     FLAG_411 = -DMETIS_5
 #        If FLAG_411 is defined, uncomment path below	     
-             PARLIB = 
+             PARLIB =  
 #             PARTINCS = -I/usr/local/install/metis-5.1.0/gcc-4.4.7/include
 #             PARTLIBS = -L/usr/local/install/metis-5.1.0/gcc-4.4.7/lib -lmetis
 	     PARTINCS = -I$(INSTALLDIR)/include
@@ -247,9 +247,11 @@
 #  Semi-Implicit time stepping method
 #--------------------------------------------------------------------------
 
-#             FLAG_9 = -DSEMI_IMPLICIT
+             FLAG_9 = -DSEMI_IMPLICIT
 #             include ${PETSC_DIR}/bmake/common/variables
-
+	     include ${TACC_PETSC_DIR}/lib/petsc/conf/petscvariables
+	     TACC_PETSC_LIB = -L${PETSC_LIB} -lpetsc
+#             include /scratch/tacc/apps/intel19/impi19_0/petsc/3.15/lib/petsc/conf/petscvariables
 
 #---------------------------------------------------------------------------
 #       SOLID BOUNDARY     IF GCN, NO GHOST CELL
@@ -296,7 +298,7 @@
 #       RIVER INPUT FILES!
 #--------------------------------------------------------------------------
 
-            FLAG_14 = -DRIVER_FLOAT
+#            FLAG_14 = -DRIVER_FLOAT
 
 #--------------------------------------------------------------------------
 #        The TVD (total variational diminishing) option for FVCOM was developed by 
@@ -449,7 +451,7 @@
 #        NON-HYDROSTATIC MODEL:
 #--------------------------------------------------------------------------
 
-#             FLAG_30 =  -DNH
+             FLAG_30 =  -DNH
 #             include ${PETSC_DIR}/bmake/common/variables
 
 #--------------------------------------------------------------------------
@@ -597,6 +599,7 @@
 	 FC       = mpif90  #ls6
 #         FC       = mpiifort  #ganymede
          DEBFLGS  = -check all -traceback
+#	 DEBFLGS  = -check all -g -traceback --with-debugging=yes -C 
 # Use 'OPT = -O0 -g'  for fast compile to test the make 
 # Use 'OPT = -xP' for fast run on em64t (Hydra and Guppy)
 # Use 'OPT = -xN' for fast run on ia32 (Salmon and Minke)
@@ -681,8 +684,8 @@
 
             LIBS  =	$(LIBDIR) $(CLIB) $(PARLIB) $(PARTLIBS) $(IOLIBS)	$(DTLIBS)\
 			$(MPILIB) $(GOTMLIB) $(KFLIB) $(BIOLIB)	\
-			$(OILIB) $(VISITLIB) $(PROJLIBS) $(PETSC_LIB)
+			$(OILIB) $(VISITLIB) $(PROJLIBS) $(TACC_PETSC_LIB)
 
             INCS  = 	$(INCDIR) $(IOINCS) $(GOTMINCS) $(BIOINCS)\
 			 $(VISITINCPATH) $(PROJINCS) $(DTINCS) $(PARTINCS)\
-			 $(PETSC_FC_INCLUDES)
+			 $(PETSC_FC_INCLUDES) 

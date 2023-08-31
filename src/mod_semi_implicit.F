@@ -30,6 +30,10 @@ MODULE MOD_SEMI_IMPLICIT
 # if defined (SEMI_IMPLICIT)
 
   USE MOD_PREC, ONLY : SP, DP
+
+#include <petsc/finclude/petsc.h>
+     use petsc
+
   IMPLICIT NONE
 
   PRIVATE
@@ -41,18 +45,6 @@ MODULE MOD_SEMI_IMPLICIT
   PUBLIC :: UV3D_SBD
   PUBLIC :: NAME_LIST_INITIALIZE_SEMI
   PUBLIC :: NAME_LIST_PRINT_SEMI
-
-#include "include/finclude/petsc.h"
-#include "include/finclude/petscvec.h"
-#include "include/finclude/petscda.h"
-#include "include/finclude/petscmat.h"
-#include "include/finclude/petscksp.h"
-#include "include/finclude/petscpc.h"
-#include "include/finclude/petscis.h"
-#include "include/finclude/petscis.h90"
-#include "include/finclude/petscao.h"
-#include "include/finclude/petscvec.h90"
-#include "include/finclude/petscviewer.h"
 
   INTEGER , PUBLIC  :: STAGE, KSTAGE_UV, KSTAGE_TE, KSTAGE_TS
   REAL(SP), PUBLIC  :: IFCETA, BEDF

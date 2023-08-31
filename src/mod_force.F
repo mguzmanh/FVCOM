@@ -9071,7 +9071,7 @@ CONTAINS
        IF(STATUS /= 0) CALL FATAL_ERROR("ALLOCATION ERROR IN SURFACE WINDSTRESS")
        CALL NC_CONNECT_PVAR(WINDS_STRY_P,STORAGE_VEC)
        NULLIFY(STORAGE_VEC)
-       
+
 !==============================================================
     CASE DEFAULT
 !==============================================================
@@ -13499,8 +13499,7 @@ CONTAINS
     REAL(SP), POINTER :: VNP(:), VPP(:)
     TYPE(NCFTIME), POINTER :: FTM
     INTEGER :: STATUS
-
-
+    
     IF(.NOT. ALLOCATED(wstrx)) CALL FATAL_ERROR &
          &("THE WIND VARIABLE PASSED TO UPDATE IS NOT ALLOCATED")
     IF(.NOT. ALLOCATED(wstry)) CALL FATAL_ERROR &
@@ -13584,7 +13583,7 @@ CONTAINS
        CALL NC_POINT_VAR(WINDS_STRX_N,VNP)
        CALL NC_POINT_VAR(WINDS_STRX_P,VPP)   
        WSTRX = FTM%NEXT_WGHT * VNP + FTM%PREV_WGHT * VPP
-
+       
        ! THE Y DIRECTION WIND STRESS
        CALL UPDATE_VAR_BRACKET(WINDS_FILE,WINDS_STRY_P,WINDS_STRY_N,WTIME,STATUS)
        IF (STATUS /= 0) THEN
@@ -16109,7 +16108,7 @@ CALL FATAL_ERROR("TIME DEPENDANT WIND Not Set Up Yet")
        IF(STATUS /= 0) CALL FATAL_ERROR("ALLOCATION ERROR IN SURFACE WINDSTRESS")
        CALL NC_CONNECT_PVAR(WINDW_STRY_P,STORAGE_VEC)
        NULLIFY(STORAGE_VEC)
-       
+
 !==============================================================
     CASE DEFAULT
 !==============================================================

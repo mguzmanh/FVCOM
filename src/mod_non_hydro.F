@@ -40,6 +40,8 @@ MODULE NON_HYDRO
   USE MOD_SPHERICAL, ONLY: ARCX, ARC 
 # endif
 
+#include <petsc/finclude/petsc.h>
+     use petsc
   IMPLICIT NONE
 
   PRIVATE
@@ -54,17 +56,6 @@ MODULE NON_HYDRO
   PUBLIC :: GET_ISWETBC
 
 ! must include all necessary headers in petsc fortran interface
-#include "include/finclude/petsc.h"
-#include "include/finclude/petscvec.h"
-#include "include/finclude/petscda.h"
-#include "include/finclude/petscmat.h"
-#include "include/finclude/petscksp.h"
-#include "include/finclude/petscpc.h"
-#include "include/finclude/petscis.h"
-#include "include/finclude/petscis.h90"
-#include "include/finclude/petscao.h"
-#include "include/finclude/petscvec.h90"
-#include "include/finclude/petscviewer.h"
 
   INTEGER, PUBLIC                ::  PROJ_SWITCH
   REAL(SP), PUBLIC, ALLOCATABLE  ::  W4ZT(:,:), RHS(:,:), QP(:,:)
