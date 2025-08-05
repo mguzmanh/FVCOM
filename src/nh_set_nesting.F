@@ -27,7 +27,7 @@
       II = I_OBC_N(JN)
 
       DO K=1, KB
-        W4ZT(II,K) = WTS(II,K) + (1.0_SP+Z(II,K))*(EL(II)-ET(II))/DTI
+        W4ZT(II,K) = WTS(II,K) + (1.0_SP+Z(II,K))*(EL(II)-ET(II))/DTI !M Guzman
       ENDDO
     END DO
     DO J = 1,IBCN(4)

@@ -697,7 +697,6 @@ PROGRAM FVCOM
    CALL WAVE_CURRENT_SETUP
 #  endif
 #  endif  
-
 #  if defined (PLBC)
    CALL FIND_NODE_CELL
 #  endif

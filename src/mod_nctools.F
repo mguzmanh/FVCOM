@@ -287,7 +287,7 @@ SUBROUTINE NC_CREATE(NCF)
   ELSE
     status = nf90_create(trim(NCF%fname),NF90_NETCDF4,NCF%ncid)
   ENDIF
-# elsei
+# else
 !  if(libnetcdf(1:1) == '4') CALL FATAL_ERROR("The version of NetCDF is 4.",&
 !               & "Please use NetCDF3.")
   IF(NPROCS_FVCOM > 1 .and. USE_MPI_IO_MODE) THEN
@@ -296,7 +296,6 @@ SUBROUTINE NC_CREATE(NCF)
   ELSE
     status = nf90_create(trim(NCF%fname),NF90_64BIT_OFFSET,NCF%ncid)
   ENDIF
-   WRITE(IPT,*)'! 2.083 entered nc create output start file!'
 # endif
 # else
 # if defined (USE_NETCDF4)
